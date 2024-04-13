@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -32,19 +32,18 @@ public class taskController {
 
     @GetMapping("/task")
     @Operation(summary = "Lista todas as tarefas da lista")
-    
     public ResponseEntity<List<task>> listAll() {
-        try{
-            List<task> taskList = new ArrayList<task>();
-            taskRepository.findAll().forEach(taskList::add);
-        if(taskList.isEmpty()){
-              return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    try {
+        List<task> taskList = taskRepository.findAll();
+        if (taskList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-              return new ResponseEntity<>(taskList, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(taskList, HttpStatus.OK);
+    } catch (Exception e) {
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    }
+
 
     @PostMapping("/task")
     @Operation(summary = "Cria uma nova tarefa")
@@ -87,5 +86,24 @@ public class taskController {
         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
+
+    // apagar depois do teste
+    @GetMapping("/task/{id}")
+    @Operation(summary = "Recupera uma tarefa pelo ID")
+    public ResponseEntity<task> getTaskById(@PathVariable("id") Long id) {
+        try {
+            Optional<task> taskData = taskRepository.findById(id);
+
+            if (taskData.isPresent()) {
+                task retrievedTask = taskData.get();
+                return new ResponseEntity<>(retrievedTask, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
