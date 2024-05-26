@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,5 +24,8 @@ public class taskService {
         taskRepository.deleteById(id);
     }
 
-    
+    @Operation(summary = "Listar todas as tarefas")
+    public Page<task> listAll(Pageable pageable) {
+        return taskRepository.findAll(pageable);
+    }
 }
