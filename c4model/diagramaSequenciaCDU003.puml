@@ -1,0 +1,19 @@
+@startuml
+title Diagrama de Sequencia referente ao CDU001 - Excluir tarefa
+actor Usuário
+participant taskController
+participant taskService
+participant taskRepository
+
+activate taskController
+
+Usuário -> taskController: DELETE /task/{id}
+activate taskService
+taskController -> taskService: deleteTask(id)
+activate taskRepository
+taskService -> taskRepository: deleteById(id)
+deactivate taskRepository
+deactivate taskService
+taskController --> Usuário: ResponseEntity<HttpStatus> NO_CONTENT
+
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+title Diagrama de Sequencia referente ao CDU001 - Concluir tarefa
+
+actor Usuário
+participant taskController
+participant taskRepository
+participant taskService
+
+activate taskController
+
+Usuário -> taskController: PUT /task/{id}/complete
+activate taskRepository
+activate taskService
+taskController -> taskRepository: findById(id)
+taskRepository --> taskController: taskData
+taskController -> taskRepository: save(existingTask)
+deactivate taskRepository
+deactivate taskService
+taskController --> Usuário: ResponseEntity<Task> OK
+
+@enduml

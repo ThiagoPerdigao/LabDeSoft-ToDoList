@@ -1,0 +1,22 @@
+@startuml
+title Diagrama de Sequencia referente ao CDU001 - Recuperar Tarefas
+
+actor Usuário
+participant taskController
+participant taskRepository
+participant taskService
+
+activate taskController
+
+Usuário -> taskController: GET /task
+activate taskService
+taskController -> taskService: listAll()
+activate taskRepository
+taskService -> taskRepository: findAll()
+taskRepository --> taskService: taskList
+deactivate taskRepository
+deactivate taskService
+taskController --> Usuário: ResponseEntity<List<Task>> OK
+
+
+@enduml
