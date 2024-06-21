@@ -1,9 +1,12 @@
 import React from 'react';
-import { TodoWrapper } from './components/Todowrapper';
-export function App(props) {
-return (
-<div className='App'>
-<TodoWrapper />
-</div>
-);
+import { TodoWrapper } from './components/TodoWrapper';
+
+export function App() {
+  return (
+    <div className='App'>
+      <TodoWrapper />
+    </div>
+  );
 }
+
+export default App;
