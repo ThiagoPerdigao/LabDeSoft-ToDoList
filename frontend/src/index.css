@@ -67,19 +67,102 @@
             }
             .incompleted {
             color: #000;
-            text-decoration: line-through;
+            text-decoration: none;
             cursor: pointer;
             }
             .completed {
-            color: #c5aeff;
+            color: #049404;
             text-decoration: line-through;
             cursor: pointer;
             }
-            .delete-icon {
-            cursor: pointer;
-            }      
+            .completed button {
+
+              text-decoration: none !important;
+
+              }
+
+            .buttons {
+                display: flex;
+                gap: 10px; /* Espaçamento entre os botões */
+              }
+              
+              .delete-icon{
+                cursor: pointer;
+                background-color: #ff1616;
+                color: #fff;
+                border: none;
+                padding: 0.55rem 1rem;
+                text-decoration: none !important;
+              }  
+              
+              .delete-icon:hover{
+                cursor: pointer;
+                background-color: #940e0e;
+                color: #fff;
+                border: none;
+                padding: 0.55rem 1rem;
+              } 
+              
+              .edit-icon {
+                cursor: pointer;
+                background-color: #45f300;
+                color: #fff;
+                border: none;
+                padding: 0.55rem 1rem;
+              }   
+
+              .edit-icon:hover {
+                cursor: pointer;
+                background-color: #29720c;
+                color: #fff;
+                border: none;
+                padding: 0.55rem 1rem;
+              }   
             
             .Todo {
-                border-top: 1px solid #ccc; /* Adiciona uma borda sólida de 1px no topo */
-                padding: 10px; /* Adiciona um espaçamento interno para melhorar o espaçamento visual */
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-top: 1px solid #ccc;
+                padding: 10px;
               }
+
+              .todo-input,
+                select {
+                outline: none;
+                background: none;
+                border: 1px solid #94B9FF;
+                padding: 0.5rem 1rem;
+                margin-top: 1rem;
+                margin-bottom: 2rem;
+                width: 300px;
+                color: #000;
+                }
+
+                .todo-input::placeholder,
+                select::placeholder {
+                color: #ffffff4d;
+                }
+
+                .todo-btn {
+                background: #94B9FF;
+                color: #fff;
+                border: none;
+                padding: 0.55rem;
+                cursor: pointer;
+                }
+
+                select {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                }
+
+                select:focus {
+                border-color: #72a24d; /* Cor da borda ao focar */
+                }
+
+                select option {
+                background-color: #fff;
+                color: #000;
+                }
