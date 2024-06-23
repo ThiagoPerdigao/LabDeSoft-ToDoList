@@ -1,18 +1,24 @@
 @startuml
-title Diagrama de Sequencia referente ao CDU001 - Criar tarefa
+title Diagrama de Sequencia referente ao CDU002 - Criar tarefa
+
 actor Usuário
+participant frontend
 participant taskController
 participant taskRepository
-participant taskService
+participant task
 
+activate frontend
+Usuário -> frontend: Solicitar criação de tarefa
+frontend -> taskController: POST /task
 activate taskController
-
-Usuário -> taskController: POST /task
-activate taskRepository
-activate taskService
 taskController -> taskRepository: save(newTask)
-taskRepository --> taskController: createdTask
+activate taskRepository
+taskRepository --> task: createdTask
 deactivate taskRepository
-deactivate taskService
-taskController --> Usuário: ResponseEntity<Task> CREATED
+deactivate task
+taskController --> frontend: ResponseEntity<Task> CREATED
+deactivate taskController
+frontend --> Usuário: Notificar sucesso da criação
+deactivate frontend
+
 @enduml

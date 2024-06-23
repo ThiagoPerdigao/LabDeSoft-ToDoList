@@ -2,13 +2,14 @@
 title Diagrama de Sequencia referente ao CDU001 - Recuperar Tarefas
 
 actor Usuário
+participant frontend
 participant taskController
 participant taskRepository
 participant taskService
 
-activate taskController
-
-Usuário -> taskController: GET /task
+Usuário -> frontend: Requisitar Tarefas
+activate frontend
+frontend -> taskController: GET /task
 activate taskService
 taskController -> taskService: listAll()
 activate taskRepository
@@ -16,7 +17,9 @@ taskService -> taskRepository: findAll()
 taskRepository --> taskService: taskList
 deactivate taskRepository
 deactivate taskService
-taskController --> Usuário: ResponseEntity<List<Task>> OK
-
+taskController --> frontend: ResponseEntity<List<Task>> OK
+deactivate taskController
+frontend --> Usuário: Exibir Tarefas
+deactivate frontend
 
 @enduml
